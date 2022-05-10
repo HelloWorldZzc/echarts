@@ -1,1 +1,3 @@
 # echarts
+本文件夹用于记录学习echarts中的一些源代码
+在echarts-basic中主要展示一些常见的，直接使用echarts.js文件的页面
