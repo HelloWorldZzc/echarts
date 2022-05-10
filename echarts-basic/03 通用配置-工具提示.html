@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="./lib/echarts.js"></script>
+</head>
+<body>
+<div style="width: 600px;height: 600px;"></div>
+</body>
+<script>
+    let myChart = echarts.init(document.querySelector("div"))
+    let x_data = ['张三', '李四', '王五', '闰土', '小明', '茅台', '二妞', '大强']
+    let y_data = [88, 92, 63, 77, 94, 80, 72, 86]
+    let option = {
+        title: { // 标题设置
+            text: '成绩展示', // 标题文字
+            textStyle: { // 标题文字样式设置
+                color: 'red'
+            },
+            borderWidth: 5, // 标题边框宽度
+            borderColor: 'blue', // 标题边框颜色
+            borderRadius: 5, // 标题边框圆角
+            left: 50, // 标题距离左边的距离
+            top: 10 // 标题距离顶部的距离
+        },
+        xAxis: {
+            type: "category",//表明x轴为类目轴
+            data: x_data
+        },
+        yAxis: {
+            type: "value"//表明y轴为数据轴
+        },
+        //数据的配置，里面是一个数组，里面包含着多个对象
+        series: [
+            {
+                name: "语文",
+                type: "bar",
+                data: y_data,
+            }
+        ],
+        //工具提示
+        tooltip:{
+          trigger:"axis",//item代表的是每个柱本身, axis代表的是坐标轴
+          triggerOn: "click",// 触发时机, click代表点击, mouseOver代表鼠标移过
+          //formatter: '{b} 的成绩是 {c}' //显示的内容,具体的b,c代表什么不同的图标有不同的说明，更多的要查找文档
+          formatter:function (e){
+            console.log(e)
+            return e[0].name + '的分数是:' + e[0].data
+          }
+        }
+    }
+    myChart.setOption(option)
+</script>
+
+</html>
