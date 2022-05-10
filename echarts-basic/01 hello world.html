@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello Echarts</title>
+    <script src="./lib/echarts.js"></script>
+</head>
+
+<body>
+<!-- 定义一个盒子，一定要配置好宽和高，用于展示图表 -->
+<div style="width: 300px;height: 300px;"></div>
+</body>
+<script>
+    // 创建一个变量
+    var myChart = echarts.init(document.querySelector("div"))
+    // 变量的一些配置
+    var option = {
+        title: {
+            text: 'ECharts 入门示例',
+            link: 'https://www.baidu.com',
+            textStyle:{
+                color:"red"
+            }
+        },
+        xAxis: {
+            type: 'category',//指明X轴为类目轴
+            data: ['小明', '小红', '小王']
+        },
+        yAxis: {
+            type: 'value'// 指明x轴为 数值轴, 指明数值轴之后, 无需指定data
+        },
+        series: [
+            {
+                name: '语文',
+                type: 'bar',//指明图表类型为柱状图
+                data: [70, 92, 87]
+            }
+        ]
+    }
+    // set
+    myChart.setOption(option)
+</script>
+
+</html>
