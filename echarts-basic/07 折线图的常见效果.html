@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <script src="./lib/echarts.js"></script>
+</head>
+<body>
+<div style="width: 600px;height: 400px;"></div>
+</body>
+<script>
+  let myChart = echarts.init(document.querySelector("div"))
+  let xDataArr = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+  let yDataArr = [3000, 2800, 900, 1000, 800, 700, 1400, 1300, 900, 1000, 800, 600]
+  let yDataArr2 = [2000, 3800, 1900, 500, 900, 1700, 2400, 300, 1900, 1500, 1800, 200]
+  let option = {
+    xAxis: {
+      type: 'category',
+      data: xDataArr,
+      boundaryGap: false // x轴的第1个元素是否与y轴有距离
+    },
+    yAxis: {
+      type: 'value',
+      scale: true //自动优化，让y轴的初始值不是0
+    },
+    series: [
+      {
+        name: '康师傅',
+        data: yDataArr,
+        type: 'line', // 设置图表类型为折线图
+        //堆叠图-->列表全部显示在一个图会比较乱，使用堆叠图，使得一个图在另外一个图的上方
+        stack:"test1",//两个的名字设置成一样的就行
+
+        // 标记点
+        markPoint:{
+          data:[
+            {
+              type:"max"
+            },
+            {
+              type:"min"
+            }
+          ]
+        },
+        // 标记线
+        markLine:{
+          data:[
+            {
+              type:"average"
+            }
+          ]
+        },
+        smooth:true,//设置是否为平滑线
+        //设置线的样式
+        lineStyle:{
+          color:"green",
+          type:"solid"// dashed dotted solid  更多的可参考文档
+        },
+        // 线和x轴形成的区域设置
+        areaStyle:{
+          color: "pink"
+        }
+      },{
+        name:"统一",
+        data:yDataArr2,
+        type:"line",
+        stack: "test1",
+        label:{
+          show:true
+        }
+      }
+    ]
+  }
+  myChart.setOption(option)
+</script>
+
+</html>
