@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <script src="./lib/echarts.js"></script>
+</head>
+<body>
+<div style="width: 600px;height: 600px;"></div>
+</body>
+<script>
+  let myChart = echarts.init(document.querySelector("div"))
+  let pieData = [
+    {
+      name: '淘宝',
+      value: 11231
+    },
+    {
+      name: '京东',
+      value: 22673
+    },
+    {
+      name: '唯品会',
+      value: 6123
+    },
+    {
+      name: '1号店',
+      value: 8989
+    },
+    {
+      name: '聚美优品',
+      value: 6700
+    }
+  ]
+  let option = {
+    //  饼状图不需要x,y，直接使用series即可
+    series:[
+      {
+        type:"pie",
+        data:pieData,
+        //饼图文字的显示
+        label:{
+          show:true,
+          formatter:function (arg){
+            return arg.name + '平台' + arg.value + '元\n' + arg.percent + '%'
+          }
+        },
+        //radius:"40%" //显示的百分比
+        //圆环图
+        radius:["30%","60%"],
+        //南丁格尔图
+        // roseType: 'radius',
+        // 选中的效果
+        selectedMode: 'multiple',//single，multiple两种效果
+        //偏移的距离
+        selectedOffset: 30
+      }
+    ]
+  }
+  myChart.setOption(option)
+</script>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./lib/echarts.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.27.2/axios.js"></script>
+</head>
+<body>
+<div style="width: 1000px;height: 1000px;"></div>
+<script>
+  let myChart = echarts.init(document.querySelector("div"))
+  // 数据存放,以便于在不同的位置展示不同的颜色
+  let airData = [
+    { name: '北京', value: 390.92 },
+    { name: '天津', value: 39.13 },
+    { name: '上海', value: 31.22 },
+    { name: '重庆', value: 66 },
+    { name: '河北', value: 147 },
+    { name: '河南', value: 113 },
+    { name: '云南', value: 25.04 },
+    { name: '辽宁', value: 50 },
+    { name: '黑龙江', value: 114 },
+    { name: '湖南', value: 175 },
+    { name: '安徽', value: 117 },
+    { name: '山东', value: 92 },
+    { name: '新疆', value: 84 },
+    { name: '江苏', value: 67 },
+    { name: '浙江', value: 84 },
+    { name: '江西', value: 96 },
+    { name: '湖北', value: 273 },
+    { name: '广西', value: 59 },
+    { name: '甘肃', value: 99 },
+    { name: '山西', value: 39 },
+    { name: '内蒙古', value: 58 },
+    { name: '陕西', value: 61 },
+    { name: '吉林', value: 51 },
+    { name: '福建', value: 29 },
+    { name: '贵州', value: 71 },
+    { name: '广东', value: 38 },
+    { name: '青海', value: 57 },
+    { name: '西藏', value: 24 },
+    { name: '四川', value: 58 },
+    { name: '宁夏', value: 52 },
+    { name: '海南', value: 54 },
+    { name: '台湾', value: 88 },
+    { name: '香港', value: 66 },
+    { name: '澳门', value: 77 },
+    { name: '南海诸岛', value: 55 }
+  ]
+  axios.get("./lib/矢量地图数据/china.json").then(res => {
+    //注册地图，格式（"取名"，获得到的数据）
+    echarts.registerMap('chinaMap', res.data)
+    option = {
+      //在geo中设置 与其他的图形有所不同
+      geo: {
+        type: 'map',
+        map: 'chinaMap', // 需要与取名一样
+        roam: true, // 设置允许缩放以及拖动的效果
+        label: {
+          show: true // 展示标签
+        },
+        zoom: 1.1, // 设置初始化的缩放比例
+        // center: [87.617733, 43.792818] // 设置地图中心点的坐标,该点在地图的中心
+      },
+      // 数据进行绑定
+      series:[
+        {
+          data:airData,
+          geoIndex:0, // 将这个数据与第一个geo关联起来
+          type:"map"
+        }
+      ],
+      // 对展示的东西进行设置
+      visualMap:{
+        min:0,
+        max:300,
+        // 控制颜色渐变的范围
+        inRange: {
+          color: ['white', 'red']
+        },
+        calculable: true // 出现滑块
+      }
+    }
+    myChart.setOption(window.option)
+  })
+
+</script>
+</body>
+
+</html>

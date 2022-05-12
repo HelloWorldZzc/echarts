@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/echarts.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.27.2/axios.js"></script>
+</head>
+<body>
+<div style="width: 1000px;height: 1000px;"></div>
+<script>
+    let myChart = echarts.init(document.querySelector("div"))
+    axios.get("./lib/矢量地图数据/province/jiangxi.json").then(res => {
+        //注册地图，格式（"取名"，获得到的数据）
+        echarts.registerMap('chinaMap', res.data)
+        option = {
+            //在geo中设置 与其他的图形有所不同
+            geo: {
+                type: 'map',
+                map: 'chinaMap', // 需要与取名一样
+                roam: true, // 设置允许缩放以及拖动的效果
+                label: {
+                     show: true // 展示标签
+                },
+                zoom: 1.1, // 设置初始化的缩放比例
+                // center: [87.617733, 43.792818] // 设置地图中心点的坐标,该点在地图的中心
+            }
+        }
+        myChart.setOption(window.option)
+    })
+
+</script>
+</body>
+
+</html>
