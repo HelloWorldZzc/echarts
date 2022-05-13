@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="./lib/echarts.js"></script>
+</head>
+<body>
+<div style="width: 600px;height: 600px;"></div>
+</body>
+<script>
+    //最高原则：主题的影响范围<全局调色<局部调色 遵循就近原则
+    let myChart = echarts.init(document.querySelector("div"))
+    let pieData = [
+
+        {
+            name: '淘宝',
+            value: 11231
+        },
+        {
+            name: '京东',
+            value: 22673
+        },
+        {
+            name: '唯品会',
+            value: 6123
+        },
+        {
+            name: '1号店',
+            value: 8989
+        },
+        {
+            name: '聚美优品',
+            value: 6700
+        }
+    ]
+    let option = {
+        color:['red', 'green', 'blue', 'skyblue', 'purple'],
+        series:[
+            {
+                type:"pie",
+                data:pieData,
+                //局部调色的使用
+                color:['pink', 'yellow', 'black', 'orange', 'red']
+            }
+        ]
+    }
+    myChart.setOption(option)
+</script>
+
+</html>

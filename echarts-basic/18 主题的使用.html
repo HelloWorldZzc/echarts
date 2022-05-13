@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="./lib/echarts.js"></script>
+    <script src="theme/vintage.js"></script>
+</head>
+<body>
+<div style="width: 600px;height: 600px;"></div>
+</body>
+<script>
+    //系统自带了两种主题 light与dark
+    //更多的主题可以去官网下载或者自己配置，使用JavaScript导入后声明即可
+    // let myChart = echarts.init(document.querySelector("div"),"dark")
+    let myChart = echarts.init(document.querySelector("div"),"vintage")
+    let x_data = ['张三', '李四', '王五', '闰土', '小明', '茅台', '二妞', '大强']
+    let y_data = [88, 92, 63, 77, 94, 80, 72, 86]
+    let option = {
+        xAxis: {
+            type: "category",
+            data: x_data
+        },
+        yAxis: {
+            type: "value"
+        },
+        series: [
+            {
+                name: "语文",
+                type: "bar",
+                data: y_data,
+                label: {
+                    show: true,
+                    rotate: 1,
+                    position: "top"
+                },
+                barWidth: "30%"
+            }
+        ]
+    }
+    myChart.setOption(option)
+</script>
+
+</html>

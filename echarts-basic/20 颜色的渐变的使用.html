@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <script src="./lib/echarts.js"></script>
+</head>
+<body>
+<div style="width: 600px;height: 600px;"></div>
+</body>
+<script>
+  let myChart = echarts.init(document.querySelector("div"))
+  let x_data = ['张三', '李四', '王五', '闰土', '小明', '茅台', '二妞', '大强']
+  let y_data = [88, 92, 63, 77, 94, 80, 72, 86]
+  let option = {
+    xAxis: {
+      type: "category",
+      data: x_data
+    },
+    yAxis: {
+      type: "value"
+    },
+    series: [
+      {
+        name: "语文",
+        type: "bar",
+        data: y_data,
+        itemStyle:{
+          //线性渐变的效果
+          // color:{
+          //   type:"linear",//渐变效果
+          //   x:0,y:0,x2:0,y2:1,//从00到01的位置进行渐变
+          //   colorStops:[
+          //     { offset: 0, color: 'red'}, // 0%处的颜色为红色
+          //     { offset: 1, color: 'blue'} // 100%处的颜色为蓝
+          //   ]
+          // }
+
+          // 径向渐变的效果
+          color:{
+            type:"radial",
+            x:0.5,y:0.5,r:0.5,
+            colorStops:[
+              {
+                offset: 0, color: 'red' // 0%处的颜色为红色
+              },
+              {
+                offset: 1, color: 'blue' // 100%处的颜色为蓝
+              }
+            ]
+          }
+       }
+
+      }
+    ]
+  }
+  myChart.setOption(option)
+</script>
+
+</html>
