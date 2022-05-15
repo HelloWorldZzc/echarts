@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <script src="./lib/echarts.js"></script>
+</head>
+<body>
+<div style="width: 600px;height: 600px;"></div>
+<button>修改数据</button>
+<button>增加数据</button>
+</body>
+<script>
+  // setOption的方法可以被调用多次
+  // 新的option 和旧的option配置
+  // 新旧option配置项他们之间不是替换的关系,是相互整合的关系
+  // 我们在设置新的option的时候,只需要考虑到将变化的配置项配置就可以了
+  let myChart = echarts.init(document.querySelector("div"))
+  let x_data=['张三', '李四', '王五', '闰土', '小明', '茅台', '二妞', '大强']
+  let y_data=[88, 92, 63, 77, 94, 80, 72, 86]
+  let option = {
+    xAxis:{
+      type:"category",
+      data:x_data
+    },
+    yAxis: {
+      type:"value"
+    },
+    series:[
+      {
+        name:"语文",
+        type:"bar",
+        data:y_data,
+        markPoint:{
+          data:[
+            {
+              type:"max",name:"最大值"
+            },{
+              type:"min",name:"最小值"
+            }
+          ]
+        },
+        markLine:{
+          data:[
+            {
+              type:"average",name:"平均值"
+            }
+          ]
+        },
+        label:{
+          show:true, //是否显示
+          rotate:1,//旋转的角度
+          position:"top"
+        },
+      }
+    ]
+  }
+  myChart.setOption(option)
+  // 修改数据
+  document.getElementsByTagName("button")[0].onclick=function (){
+    let new_data=[68, 62, 93, 67, 64, 90, 52, 36]
+    let option={
+      series: [
+        {data:new_data}
+      ]
+    }
+    myChart.setOption(option)
+  }
+  // 增加数据
+  document.getElementsByTagName("button")[1].onclick=function (){
+    x_data.push('小明')
+    y_data.push(90)
+    let option={
+      xAxis: {
+        data:x_data
+      },
+      series:[
+        {
+          data:y_data
+        }
+      ]
+    }
+    myChart.setOption(option)
+  }
+</script>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="./lib/echarts.js"></script>
+</head>
+<body>
+<div style="width: 600px;height: 600px;"></div>
+</body>
+<script>
+    // 最高原则 样式的优先级高于调色板与颜色渐变的效果
+    let myChart = echarts.init(document.querySelector("div"))
+    let pieData = [
+        {
+            name: '淘宝',
+            value: 11231
+        },
+        {
+            name: '京东',
+            value: 22673
+        },
+        {
+            name: '唯品会',
+            value: 6123
+        },
+        {
+            name: '1号店',
+            value: 8989
+        },
+        {
+            name: '聚美优品',
+            value: 6700
+        }
+    ]
+    let option = {
+        title: {
+            text: '饼图的测试',
+            textStyle: { // 控制标题的文字样式
+                color: 'blue'
+            }
+        },
+        series: [
+            {
+                type: 'pie',
+                data: [{
+                    value: 11231,
+                    name: "淘宝",
+                    // 淘宝这一块区域中 直接样式
+                    // 区域块
+                    itemStyle: {color: 'yellow'},
+                    // 区域字体
+                    label: {color: 'blue'},
+                    // 高亮样式 当被划过时候
+                    emphasis: {
+                        itemStyle: { // 控制淘宝这一区域的样式
+                            color: 'pink'
+                        },
+                        label: {
+                            color: 'yellow'
+                        }
+                    }
+                },
+                    {
+                        value: 22673,
+                        name: "京东"
+                    },
+                    {
+                        value: 6123,
+                        name: "唯品会",
+                    },
+                    {
+                        value: 8989,
+                        name: "1号店"
+                    },
+                    {
+                        value: 6700,
+                        name: "聚美优品"
+                    }]
+            }
+        ]
+    }
+    myChart.setOption(option)
+</script>
+
+</html>

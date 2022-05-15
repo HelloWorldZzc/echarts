@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <script src="./lib/echarts.js"></script>
+</head>
+<body>
+<div style="width: 600px;height: 600px;"></div>
+<button id="btn1">触发行为</button>
+<button id="btn2">clear</button>
+<button id="btn3">setOption</button>
+<button id="btn4">dispose</button>
+</body>
+<script>
+  /*
+  *  echartsInstance 对象是需要使用echarts.init方法调用之后得到的
+  *  echartsInstance.setOption 设置或修改图表实例的配置以及数据
+  *  echartsInstance.resize 重新计算和绘制图像
+  *  echartsInstance.on / echartsInstance.off 绑定或者解除事件处理函数
+  * https://echarts.apache.org/zh/api.html#events event事件
+  *
+  * 常见事件: 'click'、'dblclick'、'mousedown'、'mousemove'、'mouseup' 等----->鼠标事件
+  * legendselectchanged、'datazoom'、'pieselectchanged'、'mapselectchanged'---->ECharts 事件
+  * 更多的echarts事件能参考 https://echarts.apache.org/zh/api.html#events
+  *
+  * echartsInstance.dispatchAction 主动触发某些行为, 使用代码模拟用户的行为
+  * https://echarts.apache.org/zh/api.html#action 文档中有具体的行为
+  *
+  * echartsInstance.clear清空当前实例，会移除实例中所有的组件和图表清空之后可以再次 setOption
+  * echartsInstance.dispose销毁实例销毁后实例无法再被使用
+  *
+  * */
+  let myChart = echarts.init(document.querySelector("div"))
+  let pieData = [
+    {
+      name: '淘宝',
+      value: 11231
+    },
+    {
+      name: '京东',
+      value: 22673
+    },
+    {
+      name: '唯品会',
+      value: 6123
+    },
+    {
+      name: '1号店',
+      value: 8989
+    },
+    {
+      name: '聚美优品',
+      value: 6700
+    }
+  ]
+  let option = {
+    legend:{
+      data:['淘宝', '京东', '唯品会', '1号店', '聚美优品']
+    },
+    tooltip:{
+      show:true
+    },
+    series:[
+      {
+        type:"pie",
+        data:pieData,
+      }
+    ]
+  }
+  myChart.setOption(option)
+  //on 事件监听--->鼠标事件
+  myChart.on("click",function (arg){
+    console.log(arg)
+  })
+  myChart.off("click")
+
+  //on echarts事件监听，当有图表被更改时
+  myChart.on("legendselectchanged",function (arg){
+    console.log(arg)
+  })
+  myChart.off("legendselectchanged")
+
+  // dispatchAction 用户的某些行为
+  document.getElementById("btn1").onclick=function (){
+    myChart.dispatchAction({
+      type: "highlight",
+      //series 的具体哪一个
+      seriesIndex:0,
+      // 选填 具体的哪个范围
+       dataIndex:0
+    })
+  }
+  document.getElementById("btn2").onclick=function (){
+    myChart.clear()
+  }
+  document.getElementById("btn3").onclick=function (){
+    myChart.setOption(option)
+  }
+  document.getElementById("btn4").onclick=function (){
+    myChart.dispose()
+  }
+
+
+
+
+</script>
+
+</html>

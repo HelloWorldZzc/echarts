@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <script src="./lib/echarts.js"></script>
+</head>
+<body>
+<div style="width: 600px;height: 600px;"></div>
+</body>
+<script>
+  // 数据从网络获取数据可能会存在延迟的情况，为了给有用户更好的体验，增加了myChart.showLoading()， myChart.hideLoading()
+  let myChart = echarts.init(document.querySelector("div"))
+  myChart.showLoading()
+  setTimeout(()=>{
+    myChart.hideLoading()
+    let x_data=['张三', '李四', '王五', '闰土', '小明', '茅台', '二妞', '大强']
+    let y_data=[88, 92, 63, 77, 94, 80, 72, 86]
+    let option = {
+      xAxis:{
+        type:"category",//表明x轴为类目轴
+        data:x_data
+      },
+      yAxis: {
+        type:"value"//表明y轴为数据轴
+      },
+      //数据的配置，里面是一个数组，里面包含着多个对象
+      series:[
+        {
+          //根据使用手册中的一些配置进行更改
+          name:"语文",
+          type:"bar",
+          data:y_data,
+          // 标记点，具体标记哪些数据，由其中的data决定
+          markPoint:{
+            data:[
+              {
+                type:"max",name:"最大值"
+              },{
+                type:"min",name:"最小值"
+              }
+            ]
+          },
+          markLine:{
+            data:[
+              {
+                type:"average",name:"平均值"
+              }
+            ]
+          },
+          label:{
+            show:true, //是否显示
+            rotate:1,//旋转的角度
+            position:"top"
+          },
+          barWidth:"30%"
+        }
+      ]
+    }
+    myChart.setOption(option)
+  },3000)
+</script>
+</html>
