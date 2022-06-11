@@ -1,0 +1,3 @@
+在vision文件夹下需要使用npm run server启动
+同时需要后台数据的支持，在ko2文件夹下 使用node app.js启动后台服务器 3000
+koa2-后端项目
